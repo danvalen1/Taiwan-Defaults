@@ -5,7 +5,12 @@ import matplotlib
 import numpy as np
 
 
-labels_dict = {'pay_status_apr': 'Payment Status in April'}
+labels_dict = {'pay_status_apr': 'Payment Status in April',
+               'bill_apr': 'Bill Amount in April',
+               'payment_apr': 'Payment Amount in April',
+               'max_credit': 'Credit Limit',
+               'age': 'Age'
+              }
 figsize = (5, 4)
 dpi = (300)
 fontscale = 1.2
@@ -79,6 +84,11 @@ def PlotHist(df, xvar, targetdir, bins='auto'):
     
     ax.get_yaxis().set_major_formatter(
     matplotlib.ticker.FuncFormatter(lambda x, p: format(int(x), ',')))
+    
+    if ('bill' in xvar 
+        or 'payment' in xvar 
+        or 'max_credit' in xvar):
+        plt.xticks(rotation=-35)
     
     
     fig.savefig(f'{targetdir}{title}.png', bbox_inches='tight')
